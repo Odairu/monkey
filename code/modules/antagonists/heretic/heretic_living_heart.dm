@@ -217,4 +217,9 @@
 	if(tracked_mob.stat == DEAD)
 		balloon_message = "they're dead, " + balloon_message
 
+	var/datum/mind/target_mob = tracked_mob.mind
+	var/datum/antagonist/heretic/valuable_target = target_mob.has_antag_datum(/datum/antagonist/heretic)
+	if(valuable_target)
+		balloon_message = "A fellow Mansus follower... " + balloon_message
+
 	return balloon_message

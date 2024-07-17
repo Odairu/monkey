@@ -206,10 +206,16 @@
 
 	var/feedback = "Your patrons accept your offer"
 	var/sac_department_flag = sacrifice.mind?.assigned_role?.departments_bitflags | sacrifice.last_mind?.assigned_role?.departments_bitflags
+	var/datum/antagonist/heretic/target_heretic = IS_HERETIC(sacrifice)
 	if(sac_department_flag & DEPARTMENT_BITFLAG_COMMAND)
 		heretic_datum.knowledge_points++
 		heretic_datum.high_value_sacrifices++
 		feedback += " <i>graciously</i>"
+
+	if(target_heretic)
+		heretic_datum.knowledge_points += 2
+		heretic_datum.high_value_sacrifices++
+		feedback += " <i>maliciously</i>"
 
 	to_chat(user, span_hypnophrase("[feedback]."))
 	heretic_datum.total_sacrifices++
