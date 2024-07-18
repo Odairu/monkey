@@ -153,8 +153,7 @@
 
 ///Monke Edit begin - Heretics now always get another heretic as a sacrifice target (if there is one)
 	for(var/datum/mind/heretic_mind as anything in shuffle(valid_targets))
-		var/datum/antagonist/heretic/heretic_sac = heretic_mind.has_antag_datum(/datum/antagonist/heretic)
-		if(heretic_sac)
+		if(IS_HERETIC(heretic_mind))
 			final_targets += heretic_mind
 			valid_targets -= heretic_mind
 			break
