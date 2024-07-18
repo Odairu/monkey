@@ -218,9 +218,7 @@
 		balloon_message = "they're dead, " + balloon_message
 
 //Monke Edit begin
-	var/datum/mind/target_mob = tracked_mob.mind
-	var/datum/antagonist/heretic/valuable_target = target_mob.has_antag_datum(/datum/antagonist/heretic)
-	if(valuable_target)
+	if(IS_HERETIC(tracked_mob))
 		balloon_message = "A fellow Mansus follower... " + balloon_message
 //Monke Edit End
 
