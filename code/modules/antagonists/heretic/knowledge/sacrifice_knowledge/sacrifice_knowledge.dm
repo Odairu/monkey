@@ -215,7 +215,7 @@
 		feedback += " <i>graciously</i>"
 
 //Monke edit - give heretics extra points for saccing heretics
-	if(target_heretic)
+	if(IS_HERETIC(sacrifice))
 		heretic_datum.knowledge_points += 2
 		heretic_datum.high_value_sacrifices++
 		feedback += " <i>maliciously</i>"
