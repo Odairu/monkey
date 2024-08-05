@@ -10,8 +10,28 @@
 	. = ..()
 	if(.)
 		return
-	user.mob.AddComponent(/datum/component/item_pixel_shift)
+	user.mob.AddComponent(/datum/component/pixel_shift)
+	SEND_SIGNAL(user.mob, COMSIG_KB_MOB_ITEM_PIXEL_SHIFT_DOWN )
 
 /datum/keybinding/mob/item_pixel_shift/up(client/user)
 	. = ..()
 	SEND_SIGNAL(user.mob, COMSIG_KB_MOB_ITEM_PIXEL_SHIFT_UP)
+
+/datum/keybinding/mob/pixel_shift
+	hotkey_keys = list("B")
+	name = "pixel_shift"
+	full_name = "Pixel Shift"
+	description = "Shift your characters offset."
+	category = CATEGORY_MOVEMENT
+	keybind_signal = COMSIG_KB_MOB_PIXEL_SHIFT_DOWN
+
+/datum/keybinding/mob/pixel_shift/down(client/user)
+	. = ..()
+	if(.)
+		return
+	user.mob.AddComponent(/datum/component/pixel_shift)
+	SEND_SIGNAL(user.mob, COMSIG_KB_MOB_PIXEL_SHIFT_DOWN)
+
+/datum/keybinding/mob/pixel_shift/up(client/user)
+	. = ..()
+	SEND_SIGNAL(user.mob, COMSIG_KB_MOB_PIXEL_SHIFT_UP)
