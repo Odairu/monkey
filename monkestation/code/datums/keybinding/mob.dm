@@ -11,7 +11,7 @@
 	if(.)
 		return
 	user.mob.AddComponent(/datum/component/pixel_shift)
-	SEND_SIGNAL(user.mob, COMSIG_KB_MOB_ITEM_PIXEL_SHIFT_DOWN )
+	SEND_SIGNAL(user.mob, COMSIG_KB_MOB_ITEM_PIXEL_SHIFT_DOWN)
 
 /datum/keybinding/mob/item_pixel_shift/up(client/user)
 	. = ..()
