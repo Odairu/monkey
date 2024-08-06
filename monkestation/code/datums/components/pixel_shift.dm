@@ -1,7 +1,6 @@
 #define SHIFTING_PARENT 1
 #define SHIFTING_ITEMS 2
 
-
 /datum/component/pixel_shift
 	dupe_mode = COMPONENT_DUPE_UNIQUE
 	//what type of shifting parent is doing, or if they aren't shifting at all
@@ -28,6 +27,7 @@
 	RegisterSignals(parent, list(COMSIG_LIVING_RESET_PULL_OFFSETS, COMSIG_LIVING_SET_PULL_OFFSET, COMSIG_MOVABLE_MOVED), PROC_REF(unpixel_shift))
 	RegisterSignal(parent, COMSIG_MOB_CLIENT_PRE_LIVING_MOVE, PROC_REF(pre_move_check))
 	RegisterSignal(parent, COMSIG_LIVING_CAN_ALLOW_THROUGH, PROC_REF(check_passable))
+
 /datum/component/pixel_shift/UnregisterFromParent()
 	UnregisterSignal(parent, list(
 		COMSIG_KB_MOB_ITEM_PIXEL_SHIFT_DOWN,
@@ -61,22 +61,20 @@
 
 //Procs for shifting mobs
 
-/// Checks if the parent is considered passthroughable from a direction. Projectiles will ignore the check and hit.
-/datum/component/pixel_shift/proc/check_passable(mob/source, atom/movable/mover, border_dir)
-	SIGNAL_HANDLER
-	if(!isprojectile(mover) && !mover.throwing && passthroughable & border_dir)
-		return COMPONENT_LIVING_PASSABLE
-
-/// Activates Pixel Shift on Keybind down. Only Pixel Shift movement will be allowed.
 /datum/component/pixel_shift/proc/pixel_shift_down()
 	SIGNAL_HANDLER
 	shifting = SHIFTING_PARENT
 	return COMSIG_KB_ACTIVATED
 
-/// Disables Pixel Shift on Keybind up. Allows to Move.
 /datum/component/pixel_shift/proc/pixel_shift_up()
 	SIGNAL_HANDLER
 	shifting = FALSE
+
+/// Checks if the parent is considered passthroughable from a direction. Projectiles will ignore the check and hit.
+/datum/component/pixel_shift/proc/check_passable(mob/source, atom/movable/mover, border_dir)
+	SIGNAL_HANDLER
+	if(!isprojectile(mover) && !mover.throwing && passthroughable & border_dir)
+		return COMPONENT_LIVING_PASSABLE
 
 /// Sets parent pixel offsets to default and deletes the component.
 /datum/component/pixel_shift/proc/unpixel_shift()
